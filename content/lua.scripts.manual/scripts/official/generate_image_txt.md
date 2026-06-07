@@ -14,7 +14,7 @@ generate_image_txt.lua - generate text metadata
 
 A script to run a command on images to generate text metadata
 
-The medata will be displayed as an overlay on the image in lighttable mode
+The metadata will be displayed as an overlay on the image in lighttable mode
 
 ## Usage
 
