@@ -6,7 +6,7 @@ The auto-built version of the website can be found at https://darktable-org.gith
 
 ## Contributing
 
-Please see https://darktable-org.github.io/dtdocs/special-topics/contributing/ for information about contributing content
+Please see https://darktable-org.github.io/dtdocs/en/contributing/workflow/ for information about contributing content
 
 ## Obtaining and Building
 
@@ -15,7 +15,7 @@ Please see https://darktable-org.github.io/dtdocs/special-topics/contributing/ f
 The theme for the site uses https://gitlab.com/patdavid/hugo-bootstrap-bare as a git submodule.
 In order to clone this submodule along with the site you just need to add the flag `--recurse-submodules` to the clone command:
 
-    git clone --recurse-submodules https://github.com/darktable-org/dtdocs.git
+    git clone --recurse-submodules https://github.com/darktable-org/luadocs.git
 
 If you already have the site cloned, but haven't included the submodule before:
 
