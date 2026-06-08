@@ -36,11 +36,12 @@ Hugo Static Site Generator v0.73.0/extended windows/amd64 BuildDate: unknown
 If cloning the repo fresh, remember to build the bootstrap assets locally:
 
 ```
-$ cd ./themes/hugo-bootstrap-bare/assets/
-$ yarn install (or alternatively `npm install`)
-$ cd ../../hugo-darktable-docs-theme/assets/
+$ cd ./themes/hugo-darktable-docs-theme//assets/
+$ yarn install 
+$ cd ../../hugo-darktable-docs-pdf-theme/assets/
 $ yarn install
 ```
+Instead of `yarn install` you can use `npm install`.
 
 ### Updating
 
@@ -95,7 +96,7 @@ Ensure you have the [`weasyprint`](https://weasyprint.org) application installed
 ```
 mkdir -p public
 hugo server --disableFastRender --config config-pdf.yaml
-weasyprint http://localhost:1313/dtdocs/index.html public/darktable_lua_documentation.pdf
+weasyprint http://localhost:1313/luadocs/index.html public/darktable_lua_documentation.pdf
 pkill hugo
 ```
 
