@@ -6,7 +6,7 @@ The auto-built version of the website can be found at https://darktable-org.gith
 
 ## Contributing
 
-Please see https://darktable-org.github.io/dtdocs/special-topics/contributing/ for information about contributing content
+Please see https://darktable-org.github.io/dtdocs/en/contributing/workflow/ for information about contributing content
 
 ## Obtaining and Building
 
@@ -15,7 +15,7 @@ Please see https://darktable-org.github.io/dtdocs/special-topics/contributing/ f
 The theme for the site uses https://gitlab.com/patdavid/hugo-bootstrap-bare as a git submodule.
 In order to clone this submodule along with the site you just need to add the flag `--recurse-submodules` to the clone command:
 
-    git clone --recurse-submodules https://github.com/darktable-org/dtdocs.git
+    git clone --recurse-submodules https://github.com/darktable-org/luadocs.git
 
 If you already have the site cloned, but haven't included the submodule before:
 
@@ -36,11 +36,12 @@ Hugo Static Site Generator v0.73.0/extended windows/amd64 BuildDate: unknown
 If cloning the repo fresh, remember to build the bootstrap assets locally:
 
 ```
-$ cd ./themes/hugo-bootstrap-bare/assets/
-$ yarn install (or alternatively `npm install`)
-$ cd ../../hugo-darktable-docs-theme/assets/
+$ cd ./themes/hugo-darktable-docs-theme//assets/
+$ yarn install 
+$ cd ../../hugo-darktable-docs-pdf-theme/assets/
 $ yarn install
 ```
+Instead of `yarn install` you can use `npm install`.
 
 ### Updating
 
@@ -73,7 +74,7 @@ You can build the HTML website locally, the production site to deploy to hosting
 Building the site to test locally can be done from the root of the repo.
 
 ```
-$ hugo server -D --disableFastRender
+hugo server -D --disableFastRender
 ```
 
 The site should then be available at http://localhost:1313/luadocs/
@@ -95,7 +96,7 @@ Ensure you have the [`weasyprint`](https://weasyprint.org) application installed
 ```
 mkdir -p public
 hugo server --disableFastRender --config config-pdf.yaml
-weasyprint http://localhost:1313/dtdocs/index.html public/darktable_lua_documentation.pdf
+weasyprint http://localhost:1313/luadocs/index.html public/darktable_lua_documentation.pdf
 pkill hugo
 ```
 
