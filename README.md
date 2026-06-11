@@ -36,10 +36,10 @@ Hugo Static Site Generator v0.73.0/extended windows/amd64 BuildDate: unknown
 If cloning the repo fresh, remember to build the bootstrap assets locally:
 
 ```
-$ cd ./themes/hugo-darktable-docs-theme//assets/
-$ yarn install 
-$ cd ../../hugo-darktable-docs-pdf-theme/assets/
-$ yarn install
+cd ./themes/hugo-darktable-docs-theme//assets/
+yarn install 
+cd ../../hugo-darktable-docs-pdf-theme/assets/
+yarn install
 ```
 Instead of `yarn install` you can use `npm install`.
 
