@@ -6,6 +6,10 @@ theme:
 markup:
   highlight:
     style: algol_nu
+  tableOfContents:
+    startLevel: 1
+    endLevel: 3
+    ordered: false
 outputs:
   home:
     - HTML
@@ -15,4 +19,13 @@ module:
   mounts:
     - source: ./themes//hugo-darktable-docs-theme/assets/node_modules/fork-awesome/fonts
       target: static/fonts
+    # The header logos are read as resources (resources.Get "images/..."),
+    # so the files in static/ are mounted into assets/images/.
+    - source: static/darktable.svg
+      target: assets/images/darktable.svg
+    - source: static/lua-logo.gif
+      target: assets/images/lua-logo.gif
+params:
+  # Base URL for the "edit this page on GitHub" link below each page.
+  editURL: https://github.com/darktable-org/luadocs/edit/master/content/
 

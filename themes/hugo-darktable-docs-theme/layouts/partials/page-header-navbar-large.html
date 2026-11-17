@@ -1,38 +1,67 @@
-<header class="navbar navbar-expand-lg sticky-top  navbar-dark bg-dark">
-   <a class="navbar-brand" href="{{ relURL .Site.BaseURL}}" rel="home" title="{{ .Site.Title }}">
-	{{ .Site.Title | safeHTML }}
+<header class="dt-header sticky-top">
+  <div class="dt-header__inner">
+    <a class="dt-brand" href="{{ relURL .Site.BaseURL }}" rel="home" title="{{ .Site.Title }}">
+      {{ with resources.Get "images/darktable.svg" }}
+        <img src="{{ .RelPermalink }}" alt="" width="32" height="32" />
+      {{ end }}
+      <span>{{ .Site.Title | safeHTML }}</span>
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-	    {{ if .IsTranslated }}
-	      <li class="nav-item dropdown" aria-describedby="language-picker-description">
-		   <p class="sr-only" id="language-picker-description">{{ i18n "languages" | default "languages" }}</p>
-		   <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-             <img src="{{ .Site.BaseURL }}/language-icons/icon20x24px-exported-transparent.png" alt="Language Icon" height="20" class="translation-icon"/>
-		     <span>{{ i18n "translations" | default "translations" }}</span>
-		   </a>
-		   <div class="dropdown-menu dropdonw-trans" role="listbox">
-		      <a class="dropdown-item" aria-selected="true" hreflang="{{ .Site.Language.Lang }}" role="option" lang="{{ .Site.Language.Lang }}" href="{{ .Permalink }}">{{ .Site.Language.LanguageName }}</a>
-		        {{ range .Translations }}
-		      <a class="dropdown-item" hreflang="{{ .Language.Lang }}" role="option" lang="{{ .Language.Lang }}" href="{{ .Permalink }}">{{ .Language.LanguageName }}</a>
-		    {{ end }}
-		   </div>
-	       </li>
-	    {{ end }}
-	</ul>
-        <ul>
-           <form class="form-inline my-2 my-lg-0">
-                <input id="search-input" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
-           </form>
-        </ul>
+    {{- /*
+      Lua logo, next to the darktable logo, linking to lua.org. The Lua logo is
+      copyright Lua.org (graphic design by Alexandre Nakonechnyj) and is used
+      here under the terms at https://www.lua.org/images : to refer to the Lua
+      language, with a link back to lua.org and without modifying the artwork.
+    */ -}}
+    <a
+      class="dt-lua-brand"
+      href="https://www.lua.org/"
+      rel="external"
+      target="_blank"
+      title="Lua logo © Lua.org, design by Alexandre Nakonechnyj — lua.org"
+    >
+      {{ with resources.Get "images/lua-logo.gif" }}
+        <img src="{{ .RelPermalink }}" alt="Lua" width="32" height="32" />
+      {{ end }}
+    </a>
 
+    <div class="dt-header__spacer"></div>
 
+    <div class="dt-header__switcher d-none d-md-flex">
+      {{ partial "switcher-language.html" (dict "Page" . "Dropup" false) }}
     </div>
-</header>
 
-<div id="search-results" class="search-results">
-</div>
+    {{- /* The search field. On small screens app.js moves this form to the top
+           of the chapters drawer, so there is only ever one search input. */ -}}
+    <div class="dt-header__search" id="dtSearchSlot">
+      <form class="dt-search" id="dtSearch" role="search">
+        <input
+          id="search-input"
+          class="form-control"
+          type="search"
+          placeholder="{{ i18n "search" | default "Search" }}"
+          autocomplete="off"
+          aria-label="{{ i18n "search" | default "Search" }}"
+          aria-controls="search-results"
+        />
+        <kbd class="dt-search__hint" aria-hidden="true">Ctrl K</kbd>
+        {{- /* results open right below the search field */ -}}
+        <div id="search-results" class="search-results" role="listbox"></div>
+      </form>
+    </div>
+
+    {{- /* Chapters button, on the right on small screens (hidden from md up). */ -}}
+    <button
+      class="dt-iconbtn d-md-none"
+      type="button"
+      id="dtMenuButton"
+      aria-controls="dtChapters"
+      aria-expanded="false"
+      aria-label="{{ i18n "chapters" | default "Chapters" }}"
+    >
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+  </div>
+  {{- /* The six colors of the darktable logo */ -}}
+  <div class="dt-spectrum" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</header>

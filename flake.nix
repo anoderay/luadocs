@@ -15,6 +15,7 @@
       pkgs.mkShell {
         packages = with pkgs; [
           hugo
+          dart-sass   # the web theme compiles its SCSS with the Dart Sass transpiler
           yarn
           rsync
           gitFull

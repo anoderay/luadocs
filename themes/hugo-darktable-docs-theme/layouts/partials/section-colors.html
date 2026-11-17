@@ -1,0 +1,47 @@
+{{- /*
+  Color labels of the top-level sections.
+
+  The sections run once through a six-step blue ramp (light -> dark) in the
+  spirit of the Lua language, in navigation order: the first section is the
+  lightest blue, the last the darkest (near Lua's navy), the ones in between
+  are interpolated. A new section gets its color automatically.
+
+  Returns a map: section name -> (dict "color" "#rrggbb" "text" "#rrggbb")
+    color  the label itself
+    text   a dark shade of it that can be used for text
+
+  Call it with partialCached, once per language.
+  The six colors are also listed in assets/sass/modules/variables.scss --
+  keep the two in sync.
+*/ -}}
+{{- $logo := slice
+    (slice 108 168 224)
+    (slice 74 139 212)
+    (slice 47 110 196)
+    (slice 31 84 170)
+    (slice 22 63 136)
+    (slice 13 39 102)
+-}}
+{{- $sections := where site.Home.Pages "Kind" "section" -}}
+{{- $last := sub (len $sections) 1 -}}
+{{- $steps := sub (len $logo) 1 -}}
+{{- $result := dict -}}
+{{- range $i, $page := $sections -}}
+  {{- $t := 0.0 -}}
+  {{- if gt $last 0 -}}
+    {{- $t = mul (div (float $i) (float $last)) (float $steps) -}}
+  {{- end -}}
+  {{- $seg := int (math.Floor $t) -}}
+  {{- if ge $seg $steps -}}{{- $seg = sub $steps 1 -}}{{- end -}}
+  {{- $f := sub $t (float $seg) -}}
+  {{- $from := index $logo $seg -}}
+  {{- $to := index $logo (add $seg 1) -}}
+  {{- $color := "#" -}}{{- $text := "#" -}}
+  {{- range $c := seq 0 2 -}}
+    {{- $v := add (float (index $from $c)) (mul (float (sub (index $to $c) (index $from $c))) $f) -}}
+    {{- $color = printf "%s%02x" $color (int (math.Round $v)) -}}
+    {{- $text = printf "%s%02x" $text (int (math.Round (mul $v 0.45))) -}}
+  {{- end -}}
+  {{- $result = merge $result (dict $page.Section (dict "color" $color "text" $text)) -}}
+{{- end -}}
+{{- return $result -}}
